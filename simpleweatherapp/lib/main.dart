@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simpleweatherapp/Pages/weather_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -10,7 +11,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Scaffold(),
+      home: WeatherPage(),
     );
   }
 }
