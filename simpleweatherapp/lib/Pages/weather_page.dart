@@ -7,8 +7,8 @@ class WeatherPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 237, 164, 250),
+    return const Scaffold(
+      backgroundColor: Color.fromARGB(255, 237, 164, 250),
       body: Center(),
     );
   }
