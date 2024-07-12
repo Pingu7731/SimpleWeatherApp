@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:simpleweatherapp/models/weather_models.dart';
 
 class WeartherServices {
-  static const base_url = 'apikey';
+  static const baseUrl = 'apikey';
   final String apiKey;
 
   WeartherServices(this.apiKey);
@@ -15,7 +15,7 @@ class WeartherServices {
     //let the app know what weather you having
     final response = await http.get(
       Uri.parse(
-        '$base_url?q=$city&appid=#$apiKey&units=metric',
+        '$baseUrl?q=$city&appid=#$apiKey&units=metric',
       ),
     );
     if (response.statusCode == 200) {
