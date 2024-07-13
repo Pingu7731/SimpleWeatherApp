@@ -12,7 +12,7 @@ class WeatherPage extends StatefulWidget {
 
 class _WeatherPageState extends State<WeatherPage> {
   //api key
-  final _weatherService = WeartherServices("apiKey");
+  final _weatherService = WeartherServices('2a6c023cdd0b33bc3de807e41783c6f5');
 
   //weather object
   Weather? _weather;
@@ -24,13 +24,16 @@ class _WeatherPageState extends State<WeatherPage> {
 
     //get the weather after locatin the city
     try {
-      final userWeather = await _weatherService.getWeather(name);
+      final weather = await _weatherService.getWeather(name);
+      setState(() {
+        _weather = weather;
+      });
     } catch (e) {
       print(e);
     }
-    //init weather
   }
 
+  //init weather
   @override
   void initState() {
     super.initState();
@@ -40,13 +43,13 @@ class _WeatherPageState extends State<WeatherPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 237, 164, 250),
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             //city name
-            Text(_weather?.city ?? "Locating..."),
+            Text(_weather?.city ?? "Lemme see where da fuq are you"),
             //temp
             Text('${_weather?.temperature.round()}°C'),
           ],

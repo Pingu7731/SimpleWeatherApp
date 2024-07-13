@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:simpleweatherapp/models/weather_models.dart';
 
 class WeartherServices {
-  static const baseUrl = 'apikey';
+  static const baseUrl = 'http://api.openweathermap.org/data/2.5/weather';
   final String apiKey;
 
   WeartherServices(this.apiKey);
