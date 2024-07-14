@@ -15,14 +15,14 @@ class WeartherServices {
     //let the app know what weather you having
     final response = await http.get(
       Uri.parse(
-        '$baseUrl?q=$city&appid=#$apiKey&units=metric',
+        '$baseUrl?q=$city&appid=$apiKey&units=metric',
       ),
     );
     if (response.statusCode == 200) {
       return Weather.fromJson(
           jsonDecode(response.body)); //decode information from website
     } else {
-      throw Exception('Where the fuq are you');
+      throw Exception('Cant get user location');
     }
   }
 
