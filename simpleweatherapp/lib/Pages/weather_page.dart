@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 import 'package:simpleweatherapp/models/weather_models.dart';
 import 'package:simpleweatherapp/services/wearther_services.dart';
@@ -43,13 +44,16 @@ class _WeatherPageState extends State<WeatherPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             //city name
             Text(_weather?.city ?? "Lemme see where da fuq are you"),
+
+            //animation
+            Lottie.asset('assets/thunder.json'),
             //temp
             Text('${_weather?.temperature.round()}°C'),
           ],
