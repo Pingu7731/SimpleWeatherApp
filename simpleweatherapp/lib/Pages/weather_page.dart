@@ -34,6 +34,37 @@ class _WeatherPageState extends State<WeatherPage> {
     }
   }
 
+  String getWeatherAnimation(String? mainCondition) {
+    //default null anim
+    if (mainCondition == null) return 'assets/error.json';
+    switch (mainCondition) {
+      case 'clouds':
+        return 'assets/cloudy.json';
+      case 'mist':
+        return 'assets/cloudy.json';
+      case 'smoke':
+        return 'assets/cloudy.json';
+      // case 'haze':
+      //   return 'assets/.json';
+      case 'dust':
+        return 'assets/Snow.json';
+      case 'fog':
+        return 'assets/cloudy.json';
+      case 'rain':
+        return 'assets/raining.json';
+      // case 'drizzle':
+      //   return 'assets/.json';
+      case 'shower rain':
+        return 'assets/raining.json';
+      case 'thunderstorm':
+        return 'assets/Storm.json';
+      case 'clear':
+        return 'assets/Sunny.json';
+      default:
+        return 'assets/error.json';
+    }
+  }
+
   //init weather
   @override
   void initState() {
@@ -44,18 +75,43 @@ class _WeatherPageState extends State<WeatherPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: const Color.fromARGB(255, 21, 21, 21),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             //city name
-            Text(_weather?.city ?? "Lemme see where da fuq are you"),
+            Text(
+              _weather?.city ?? "Lemme see where da fuq are you",
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 45,
+                color: Colors.white,
+              ),
+            ),
 
             //animation
-            Lottie.asset('assets/thunder.json'),
+            Lottie.asset(getWeatherAnimation(_weather?.mainCondition)),
             //temp
-            Text('${_weather?.temperature.round()}°C'),
+            Text(
+              _weather?.mainCondition ?? "Unlucky",
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                color: Colors.white,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 250),
+              child: Text(
+                '${_weather?.temperature.round()}°C',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 50,
+                  color: Colors.white,
+                ),
+              ),
+            ),
           ],
         ),
       ),
