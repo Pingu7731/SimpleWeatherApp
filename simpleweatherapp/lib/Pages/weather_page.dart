@@ -61,7 +61,7 @@ class _WeatherPageState extends State<WeatherPage> {
       case 'clear':
         return 'assets/Sunny.json';
       default:
-        return 'assets/error.json';
+        return 'assets/Sunny.json';
     }
   }
 
@@ -85,7 +85,7 @@ class _WeatherPageState extends State<WeatherPage> {
               _weather?.city ?? "Lemme see where da fuq are you",
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 45,
+                fontSize: 30,
                 color: Colors.white,
               ),
             ),
@@ -95,6 +95,7 @@ class _WeatherPageState extends State<WeatherPage> {
             //temp
             Text(
               _weather?.mainCondition ?? "Unlucky",
+              textAlign: TextAlign.center,
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
