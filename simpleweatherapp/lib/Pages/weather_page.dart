@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:simpleweatherapp/models/weather_models.dart';
 import 'package:simpleweatherapp/services/wearther_services.dart';
 
@@ -13,7 +13,8 @@ class WeatherPage extends StatefulWidget {
 
 class _WeatherPageState extends State<WeatherPage> {
   //api key
-  final _weatherService = WeartherServices('2a6c023cdd0b33bc3de807e41783c6f5');
+
+  final _weatherService = WeartherServices('${dotenv.env['api']}');
 
   //weather object
   Weather? _weather;
