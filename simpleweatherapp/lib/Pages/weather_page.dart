@@ -13,7 +13,6 @@ class WeatherPage extends StatefulWidget {
 
 class _WeatherPageState extends State<WeatherPage> {
   //api key
-
   final _weatherService = WeartherServices('${dotenv.env['api']}');
 
   //weather object
