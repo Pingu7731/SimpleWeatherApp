@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:provider/provider.dart';
+import 'package:simpleweatherapp/Provider/provider.dart';
 import 'package:simpleweatherapp/models/weather_models.dart';
 import 'package:simpleweatherapp/services/wearther_services.dart';
 
@@ -12,18 +14,11 @@ class WeatherPage extends StatefulWidget {
 }
 
 class _WeatherPageState extends State<WeatherPage> {
-  //api key
   final _weatherService = WeartherServices('${dotenv.env['api']}');
-
-  //weather object
   Weather? _weather;
 
-  //get the weather
-  fetchWeather() async {
-    //locate city
+  Future<void> fetchWeather() async {
     String name = await _weatherService.getCurrentCity();
-
-    //get the weather after locatin the city
     try {
       final weather = await _weatherService.getWeather(name);
       setState(() {
@@ -35,25 +30,16 @@ class _WeatherPageState extends State<WeatherPage> {
   }
 
   String getWeatherAnimation(String? mainCondition) {
-    //default null anim
     if (mainCondition == null) return 'assets/error.json';
     switch (mainCondition.toLowerCase()) {
       case 'clouds':
-        return 'assets/cloudy.json';
       case 'mist':
-        return 'assets/cloudy.json';
       case 'smoke':
-        return 'assets/cloudy.json';
-      // case 'haze':
-      //   return 'assets/.json';
-      case 'dust':
-        return 'assets/Snow.json';
       case 'fog':
         return 'assets/cloudy.json';
+      case 'dust':
+        return 'assets/Snow.json';
       case 'rain':
-        return 'assets/raining.json';
-      // case 'drizzle':
-      //   return 'assets/.json';
       case 'shower rain':
         return 'assets/raining.json';
       case 'thunderstorm':
@@ -65,7 +51,6 @@ class _WeatherPageState extends State<WeatherPage> {
     }
   }
 
-  //init weather
   @override
   void initState() {
     super.initState();
@@ -77,16 +62,25 @@ class _WeatherPageState extends State<WeatherPage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 21, 21, 21),
       body: RefreshIndicator(
-        onRefresh: () {
-          return fetchWeather();
-        },
+        onRefresh: fetchWeather,
         child: ListView(
           children: [
+            //i added something here to chang the bg
+            Consumer<UIprovider>(
+              builder: (context, UIprovider notifier, child) {
+                return ListTile(
+                  leading: const Icon(Icons.dark_mode),
+                  trailing: Switch(
+                    value: notifier.isdark,
+                    onChanged: notifier.changeTheme,
+                  ),
+                );
+              },
+            ),
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  //city name
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Text(
@@ -98,10 +92,7 @@ class _WeatherPageState extends State<WeatherPage> {
                       ),
                     ),
                   ),
-
-                  //animation
                   Lottie.asset(getWeatherAnimation(_weather?.mainCondition)),
-                  //temp
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(

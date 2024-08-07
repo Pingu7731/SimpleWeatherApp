@@ -1,22 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:simpleweatherapp/Pages/weather_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:provider/provider.dart';
+import 'package:simpleweatherapp/Provider/provider.dart';
+import 'package:simpleweatherapp/pages/weather_page.dart';
 
-Future main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+void main() async {
   await dotenv.load(fileName: ".env");
-
-  runApp(const MainApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => UIprovider(),
+      child: MyApp(),
+    ),
+  );
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: true,
-      home: WeatherPage(),
+    return Consumer<UIprovider>(
+      builder: (context, UIprovider notifier, child) {
+        return MaterialApp(
+          //is this not the change theme bg thing ? XD
+          theme: ThemeData.light(),
+          darkTheme: ThemeData.dark(),
+          themeMode: notifier.isdark ? ThemeMode.light : ThemeMode.dark,
+          home: const WeatherPage(),
+        );
+      },
     );
   }
 }
