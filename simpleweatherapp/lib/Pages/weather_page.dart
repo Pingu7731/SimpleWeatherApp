@@ -60,16 +60,18 @@ class _WeatherPageState extends State<WeatherPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 21, 21, 21),
       body: RefreshIndicator(
         onRefresh: fetchWeather,
         child: ListView(
           children: [
-            //i added something here to chang the bg
             Consumer<UIprovider>(
               builder: (context, UIprovider notifier, child) {
                 return ListTile(
-                  leading: const Icon(Icons.dark_mode),
+                  leading: Icon(
+                    notifier.checkisicondark
+                        ? Icons.light_mode
+                        : Icons.dark_mode,
+                  ),
                   trailing: Switch(
                     value: notifier.isdark,
                     onChanged: notifier.changeTheme,
@@ -88,7 +90,6 @@ class _WeatherPageState extends State<WeatherPage> {
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
-                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -101,7 +102,6 @@ class _WeatherPageState extends State<WeatherPage> {
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
-                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -113,7 +113,6 @@ class _WeatherPageState extends State<WeatherPage> {
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 100,
-                        color: Colors.white,
                       ),
                     ),
                   ),

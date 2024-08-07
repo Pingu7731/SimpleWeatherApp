@@ -20,7 +20,6 @@ class MyApp extends StatelessWidget {
     return Consumer<UIprovider>(
       builder: (context, UIprovider notifier, child) {
         return MaterialApp(
-          //is this not the change theme bg thing ? XD
           theme: ThemeData.light(),
           darkTheme: ThemeData.dark(),
           themeMode: notifier.isdark ? ThemeMode.light : ThemeMode.dark,
