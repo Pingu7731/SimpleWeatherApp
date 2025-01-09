@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:simpleweatherapp/Provider/provider.dart';
-import 'package:simpleweatherapp/pages/weather_page.dart';
+import 'package:simpleweatherapp/Pages/weather_page.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -15,6 +15,8 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Consumer<UIprovider>(
